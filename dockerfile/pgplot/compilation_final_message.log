@@ -1,0 +1,14 @@
+*** Finished compilation of PGPLOT ***
+ 
+Note that if you plan to install PGPLOT in a different
+directory than the current one, the following files will be
+needed.
+ 
+       libpgplot.a
+       libpgplot.so
+       grfont.dat
+       rgb.txt
+ 
+Also note that subsequent usage of PGPLOT programs requires that
+the full path of the chosen installation directory be named in
+an environment variable named PGPLOT_DIR.
