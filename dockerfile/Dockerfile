@@ -13,28 +13,29 @@ RUN curl -sSL https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64
     conda config --add channels conda-forge                                       &&\
     conda config --set always_yes yes --set changeps1 no
 
-RUN source activate $PYTHON_ENV && \
+RUN pip install --upgrade pip && \
+    pip install pyvo==0.6.1 && \
     pip install https://github.com/chbrandt/eada/archive/0.9.7.1.tar.gz
 
-COPY src /tmp/src
+ENV PGPLOT_DIR=/usr/local/pgplot
+ENV PGPLOT_DEV=/cps
 
-RUN mkdir ~/tmp && cd ~/tmp && \
-    tar -xzf /tmp/src/pgplot5.2.tar.gz && \
-    mkdir /usr/local/pgplot && cd /usr/local/pgplot && \
-    cp /tmp/src/pgplot/drivers.list . && \
-    ~/tmp/pgplot/makemake ~/tmp/pgplot linux g77_gcc && \
-    make && \
-    echo "export PGPLOT_DIR=$PWD" >> $BASHRC && \
-    echo 'export PGPLOT_DEV="/cps"' >> $BASHRC && \
-    echo 'export LD_LIBRARY_PATH=$PGPLOT_DIR:$LD_LIBRARY_PATH' >> $BASHRC && \
-    rm -rf ~/tmp
+RUN echo "export PGPLOT_DIR=$PGPLOT_DIR" >> $BASHRC && \
+    echo "export PGPLOT_DEV=/cps" >> $BASHRC && \
+    echo 'export LD_LIBRARY_PATH=$PGPLOT_DIR:$LD_LIBRARY_PATH' >> $BASHRC
+
+COPY pgplot $PGPLOT_DIR
 
 RUN REPO=VOU_Blazars && \
     VERSION="1.0" && \
     TARBALL="voub.tar.gz" && \
     wget -O /${TARBALL} https://github.com/ecylchang/${REPO}/archive/${VERSION}.tar.gz && \
     cd / && tar -xzf ${TARBALL} && \
+    chmod a+w /${REPO}-${VERSION} && \
+    cd /${REPO}-${VERSION}/bin/fort && \
+    sed -i_org 's/${HOME}\/pgplot/$PGPLOT_DIR/' compile.sh && \
+    ./compile.sh
 
-COPY bin/voub.sh
+COPY bin/voub.sh /voub.sh
 
 ENV EXECAPP="/voub.sh"
