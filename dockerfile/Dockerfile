@@ -25,9 +25,9 @@ RUN echo "export PGPLOT_DIR=$PGPLOT_DIR" >> $BASHRC                             
 COPY pgplot $PGPLOT_DIR
 
 RUN cd / && git clone https://github.com/ecylchang/VOU_Blazars.git      &&\
+    git checkout stable                                                 &&\
     cd /VOU_Blazars/bin/fort                                            &&\
     sed -i_org 's/${HOME}\/pgplot/$PGPLOT_DIR/' compile.sh              &&\
     ./compile.sh
 
 ENV EXECAPP="/VOU_Blazars/bin/vou-blazars"
-
