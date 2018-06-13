@@ -25,9 +25,13 @@ RUN echo "export PGPLOT_DIR=$PGPLOT_DIR" >> $BASHRC                             
 COPY pgplot $PGPLOT_DIR
 
 RUN cd / && git clone https://github.com/ecylchang/VOU_Blazars.git      &&\
-    git checkout stable                                                 &&\
     cd /VOU_Blazars/bin/fort                                            &&\
     sed -i_org 's/${HOME}\/pgplot/$PGPLOT_DIR/' compile.sh              &&\
     ./compile.sh
+
+RUN wget http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm &&\
+    rpm -Uvh epel-release-6-8.noarch.rpm &&\
+    yum install -y ghostscript ps2eps gv &&\
+    yum clean all
 
 ENV EXECAPP="/VOU_Blazars/bin/vou-blazars"
