@@ -26,7 +26,6 @@ COPY pgplot $PGPLOT_DIR
 
 RUN cd / && git clone https://github.com/ecylchang/VOU_Blazars.git      &&\
     cd /VOU_Blazars/bin/fort                                            &&\
-    sed -i_org 's/${HOME}\/pgplot/$PGPLOT_DIR/' compile.sh              &&\
     ./compile.sh
 
 RUN wget http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm &&\
