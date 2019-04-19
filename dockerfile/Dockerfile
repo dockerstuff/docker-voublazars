@@ -22,7 +22,7 @@ RUN echo "export PGPLOT_DIR=$PGPLOT_DIR" >> $BASHRC                             
     echo "export PGPLOT_DEV=/cps" >> $BASHRC                                    &&\
     echo 'export LD_LIBRARY_PATH=$PGPLOT_DIR:$LD_LIBRARY_PATH' >> $BASHRC
 
-COPY pgplot $PGPLOT_DIR
+COPY ${PWD}/pgplot $PGPLOT_DIR
 
 RUN cd / && git clone https://github.com/ecylchang/VOU_Blazars.git      &&\
     cd /VOU_Blazars/bin/fort                                            &&\
