@@ -16,17 +16,19 @@ RUN curl -sSL https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64
     pip install pyvo==0.6.1 					                        		  &&\
     pip install https://github.com/chbrandt/eada/archive/0.9.7.1.tar.gz
 
-ENV PGPLOT_DIR=/usr/local/pgplot PGPLOT_DEV=/cps
+ENV PGPLOT_DIR=/usr/local/pgplot \
+    PGPLOT_DEV=/cps
 
-RUN echo "export PGPLOT_DIR=$PGPLOT_DIR" >> $BASHRC                             &&\
+RUN mkdir -p $PGPLOT_DIR &&\
+    echo "export PGPLOT_DIR=$PGPLOT_DIR" >> $BASHRC                             &&\
     echo "export PGPLOT_DEV=/cps" >> $BASHRC                                    &&\
     echo 'export LD_LIBRARY_PATH=$PGPLOT_DIR:$LD_LIBRARY_PATH' >> $BASHRC
 
-COPY ${PWD}/pgplot $PGPLOT_DIR
+COPY pgplot/* ${PGPLOT_DIR}/
 
 RUN cd / && git clone https://github.com/ecylchang/VOU_Blazars.git      &&\
     cd /VOU_Blazars/bin/fort                                            &&\
-    ./compile.sh
+    chmod +x compile.sh && ./compile.sh
 
 RUN wget http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm &&\
     rpm -Uvh epel-release-6-8.noarch.rpm &&\
