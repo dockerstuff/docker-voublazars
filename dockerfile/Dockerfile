@@ -13,7 +13,7 @@ RUN curl -sSL https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64
     conda config --add channels conda-forge                                       &&\
     conda config --set always_yes yes --set changeps1 no                          &&\
     pip install --upgrade pip                                                     &&\
-    pip install https://github.com/chbrandt/eada/archive/0.9.7.3.tar.gz
+    pip install https://github.com/chbrandt/eada/archive/0.9.7.5.tar.gz
 
 ENV PGPLOT_DIR=/usr/local/pgplot \
     PGPLOT_DEV=/cps
