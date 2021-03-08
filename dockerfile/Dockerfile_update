@@ -1,0 +1,8 @@
+FROM chbrandt/voublazars:1.9.1
+
+MAINTAINER "Carlos Brandt <carloshenriquebrandt at gmail>"
+
+RUN cd /VOU_Blazars && git pull      		&&\
+    cd /VOU_Blazars/bin/fort			&&\
+    chmod +x compile.sh && ./compile.sh
+
