@@ -2,6 +2,11 @@ FROM chbrandt/voublazars:latest
 
 MAINTAINER "Carlos Brandt <carloshenriquebrandt at gmail>"
 
-RUN cd /VOU_Blazars && git pull      		&&\
-    cd /VOU_Blazars/bin/fort			&&\
-    chmod +x compile.sh && ./compile.sh
+ARG TAG="v1.4"
+
+RUN cd /VOU_Blazars           &&\
+    git fetch --all           &&\
+    git checkout "$TAG"       &&\
+    cd /VOU_Blazars/bin/fort  &&\
+    chmod +x compile.sh       &&\
+    ./compile.sh
