@@ -4,7 +4,7 @@ MAINTAINER "Carlos Brandt <carloshenriquebrandt at gmail>"
 
 ENV BASHRC=/etc/bashrc
 
-RUN curl -sSL https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh \
+RUN curl -sSL https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh \
          -o /tmp/miniconda.sh                                                     &&\
     bash /tmp/miniconda.sh -bfp /usr/local                                        &&\
     rm -rf /tmp/miniconda.sh                                                      &&\
@@ -13,7 +13,7 @@ RUN curl -sSL https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64
     conda config --add channels conda-forge                                       &&\
     conda config --set always_yes yes --set changeps1 no                          &&\
     pip install --upgrade pip                                                     &&\
-    pip install https://github.com/chbrandt/eada/archive/0.9.7.5.tar.gz
+    pip install https://github.com/chbrandt/eada/archive/refs/tags/v1.0.1a.tar.gz
 
 ENV PGPLOT_DIR=/usr/local/pgplot \
     PGPLOT_DEV=/cps
