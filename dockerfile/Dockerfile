@@ -12,6 +12,7 @@ RUN curl -sSL https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64
     conda clean --all --yes                                                       &&\
     conda config --add channels conda-forge                                       &&\
     conda config --set always_yes yes --set changeps1 no                          &&\
+    conda install 'astropy<4'                                                     &&\
     pip install --upgrade pip                                                     &&\
     pip install https://github.com/chbrandt/eada/archive/refs/tags/v1.0.1a.tar.gz
 

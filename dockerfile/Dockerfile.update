@@ -2,7 +2,7 @@ FROM chbrandt/voublazars:latest
 
 MAINTAINER "Carlos Brandt <carloshenriquebrandt at gmail>"
 
-ARG TAG="v1.94"
+ARG TAG="v1.96.1"
 
 RUN cd /VOU_Blazars           &&\
     git fetch --all           &&\
