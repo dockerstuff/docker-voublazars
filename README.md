@@ -7,8 +7,7 @@ Docker container for [VOU-Blazars](https://github.com/ecylchang/VOU_Blazars)
 
 ```bash
 $ cd dockerfile/
-$ TAG="1.94"
-$ docker build -t my_voublazars --build-arg $TAG -f Dockerfile.update .
+$ docker build -t chbrandt/voublazars:1.98 --build-arg TAG="v1.98" -f Dockerfile.update .
 ```
 
 
